@@ -1,6 +1,6 @@
 /* 
 
-Invoke-WebRequest -Uri 'http://localhost:4141/portion' -Method Post -Body ('{"drinkType": "beer", "alcPercent": 5, "weightKg": 65, "gender": "male", "isLearner": false}' | ConvertTo-Json) -ContentType 'application/json'
+(Invoke-WebRequest -Uri 'http://localhost:4141/portion' -Method Post -Body ('{"drinkType": "beer", "alcPercent": 5, "weightKg": 65, "gender": "male", "isLearner": false}' | ConvertTo-Json) -ContentType 'application/json').RawContent
 * Receive JSON w/:
 - drink type (beer, wine...)
 - alc percentage
@@ -48,7 +48,6 @@ server.on("request", (request, response) => {
         responseObj.result = calculateResult(inputData);
       }
     }
-    console.log(responseObj); // check object while developing  
     response.end(JSON.stringify(responseObj));
   });
 });

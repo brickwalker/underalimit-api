@@ -28,32 +28,32 @@ function calculateResult(data) {
       portions: calculatePortion(maxLitres, drinkSize.pint, 0.5),
     });
     results.push({
-        drinkSize: "bottle",
-        portions: calculatePortion(maxLitres, drinkSize.bottle),
-      });
-      results.push({
-        drinkSize: "smallBottle",
-        portions: calculatePortion(maxLitres, drinkSize.smallBottle),
-      });
-      results.push({
-        drinkSize: "smallCan",
-        portions: calculatePortion(maxLitres, drinkSize.smallCan),
-      });
+      drinkSize: "bottle",
+      portions: calculatePortion(maxLitres, drinkSize.bottle),
+    });
+    results.push({
+      drinkSize: "smallBottle",
+      portions: calculatePortion(maxLitres, drinkSize.smallBottle),
+    });
+    results.push({
+      drinkSize: "smallCan",
+      portions: calculatePortion(maxLitres, drinkSize.smallCan),
+    });
   } else if (data.drinkType === "wine") {
     results.push({
-        drinkSize: "wineGlass",
-        portions: calculatePortion(maxLitres, drinkSize.wineGlass),
-      });
+      drinkSize: "wineGlass",
+      portions: calculatePortion(maxLitres, drinkSize.wineGlass),
+    });
   } else if (data.drinkType === "cocktails") {
     results.push({
-        drinkSize: "coctailGlass",
-        portions: calculatePortion(maxLitres, drinkSize.coctailGlass),
-      });
+      drinkSize: "coctailGlass",
+      portions: calculatePortion(maxLitres, drinkSize.coctailGlass),
+    });
   } else if (data.drinkType === "booze") {
     results.push({
-        drinkSize: "shot",
-        portions: calculatePortion(maxLitres, drinkSize.shot),
-      });
+      drinkSize: "shot",
+      portions: calculatePortion(maxLitres, drinkSize.shot),
+    });
   }
   return results;
 }
