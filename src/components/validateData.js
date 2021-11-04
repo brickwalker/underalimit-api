@@ -6,7 +6,7 @@ const requiredKeys = [
   "isLearner",
 ];
 
-const allDrinks = ["pints", "cocktails", "wine", "booze"];
+const allDrinks = ["pints", "wine", "cocktails", "booze"];
 
 const alcRange = {
   start: 0.5,
