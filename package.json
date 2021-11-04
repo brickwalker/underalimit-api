@@ -1,12 +1,12 @@
 {
   "name": "underalimit-api",
   "version": "0.1.0",
-  "description": "API for calculating driks to stay under the legal driving limit",
+  "description": "Drinks calculator for safe driving API",
   "main": "app.js",
   "scripts": {
     "start": "node ./src/app.js",
     "start:dev": "nodemon ./src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "powershell Invoke-WebRequest -Uri 'http://localhost:4141/portion' -Method Post -Body (powershell ('{\"user\": \"artem\"}' | ConvertTo-Json)) -ContentType 'application/json'"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
     "eslint-config-prettier": "^8.3.0",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "body": "^5.1.0"
   }
 }
