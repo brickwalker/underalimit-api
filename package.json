@@ -1,0 +1,27 @@
+{
+  "name": "underalimit-api",
+  "version": "0.1.0",
+  "description": "API for calculating driks to stay under the legal driving limit",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "start:dev": "nodemon ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brickwalker/underalimit-api.git"
+  },
+  "author": "Artem Nedostup (https://www.linkedin.com/in/artemnedostup)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brickwalker/underalimit-api/issues"
+  },
+  "homepage": "https://github.com/brickwalker/underalimit-api#readme",
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.14",
+    "prettier": "^2.4.1"
+  }
+}
