@@ -1,0 +1,4 @@
+{
+  "enableRequestLogging": true,
+  "requestsLogPath": "logs/requests.log"
+}

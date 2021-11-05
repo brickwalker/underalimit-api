@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/app.js",
     "start:dev": "nodemon ./src/app.js",
-    "sim:req": "node ./src/test/simulateRequest.js",
+    "request": "node ./src/test/request.js",
     "test": ""
   },
   "repository": {

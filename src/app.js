@@ -25,8 +25,11 @@
 
 */
 
+// Node modules
 const http = require("http");
 const jsonBody = require("body/json");
+// Project modules
+const logRequest = require("./components/logRequest");
 const validateData = require("./components/validateData");
 const calculateResult = require("./components/calculateResult");
 
@@ -41,6 +44,7 @@ server.on("request", (request, response) => {
     response.end("Server side error.");
   });
   jsonBody(request, response, (err, body) => {
+    logRequest(body);
     response.setHeader("X-Powered-By", "Node");
     let responseObj = {};
     responseObj.status = "ERROR";
@@ -54,6 +58,9 @@ server.on("request", (request, response) => {
       responseObj.message = `Body parsing issue: ${JSON.stringify(err)}.`;
     } else {
       try {
+        if (typeof body !== "object" && !Array.isArray(body) && body !== null) {
+          throw "Passed data is not JSON";
+        }
         responseObj = validateData(body, response);
         if (responseObj.status === "OK") {
           responseObj.result = calculateResult(body);
@@ -61,7 +68,7 @@ server.on("request", (request, response) => {
         response.setHeader("Content-Type", "application/json");
       } catch (error) {
         response.statusCode = 400;
-        responseObj.message = `Error occured: ${error.name} ${error.message}.`;
+        responseObj.message = `Error occured: ${error}.`;
       }
     }
     response.end(JSON.stringify(responseObj));

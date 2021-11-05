@@ -19,12 +19,14 @@ const options = {
   },
 };
 
-const request = http.request(options, (response) => {
-  console.log(`statusCode: ${response.statusCode}`);
-  console.log("headers:", response.headers);
-  response.on("data", (chunk) => {
-    console.log("data:", chunk.toString());
-  });
+const request = http.request(options);
+
+request.on('response', (res) => {
+    console.log(`statusCode: ${res.statusCode}`);
+    console.log("headers:", res.headers);
+    res.on("data", (chunk) => {
+      console.log("data:", chunk.toString());
+    });
 });
 
 request.on("error", (err) => {
