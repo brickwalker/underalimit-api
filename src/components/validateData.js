@@ -20,8 +20,9 @@ const kgRange = {
 
 const allGender = ["male", "female", "notProvided"];
 
-function validateData(data) {
+function validateData(data, response) {
   const passedKeys = Object.keys(data);
+  response.statusCode = 400;
   if (!validateAll(passedKeys, requiredKeys)) {
     return {
       status: "ERROR",
@@ -57,6 +58,7 @@ function validateData(data) {
       message: `Unrecognized license type entry. Passed entry ${data.isLearner.toString()}, possible options boolean true or false.`,
     };
   } else {
+    response.statusCode = 200;
     return {
       status: "OK",
       message: "Checks successful.",

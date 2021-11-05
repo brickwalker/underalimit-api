@@ -32,20 +32,36 @@ const calculateResult = require("./components/calculateResult");
 
 const server = http.createServer();
 server.on("request", (request, response) => {
+  request.on('error', err => console.log(`Request error code ${err.code}: ${err.message}.`));
+  response.on('error', err => {
+    console.log(`Response error code ${err.code}: ${err.message}.`)
+    response.statusCode = 500;
+    response.end("Server side error.");
+  });
   jsonBody(request, response, (err, body) => {
+    response.setHeader("X-Powered-By", "Node");
     let responseObj = {};
     responseObj.status = "ERROR";
     if (request.method !== "POST") {
+      response.statusCode = 405;
       responseObj.message = `Unsupported method: POST required, ${request.method} used.`;
     } else if (request.url !== "/portion") {
+      response.statusCode = 404;
       responseObj.message = `Incorrect endpoint: /portion required, ${request.url} used.`;
     } else if (err) {
       responseObj.message = `Body parsing issue: ${JSON.stringify(err)}.`;
     } else {
-      const inputData = JSON.parse(body);
-      responseObj = validateData(inputData);
-      if (responseObj.status === "OK") {
-        responseObj.result = calculateResult(inputData);
+      let inputData;
+      try {
+        inputData = JSON.parse(body);
+        responseObj = validateData(inputData, response);
+        if (responseObj.status === "OK") {
+          responseObj.result = calculateResult(inputData);
+        }
+        response.setHeader("Content-Type", "application/json");
+      } catch (error) {
+        response.statusCode = 400;
+        responseObj.message = `Error occured: ${error.name} ${error.message}.`;
       }
     }
     response.end(JSON.stringify(responseObj));
