@@ -1,30 +1,3 @@
-/* 
-
-(Invoke-WebRequest -Uri 'http://localhost:4141/portion' -Method Post -Body ('{"drinkType": "beer", "alcPercent": 5, "weightKg": 65, "gender": "male", "isLearner": false}' | ConvertTo-Json) -ContentType 'application/json').RawContent
-* Receive JSON w/:
-- drink type (beer, wine...)
-- alc percentage
-- body weight kg
-- birth gender
-- isLearner bool
-
-* Validate each key, and reply back nicely if something not right
-
-* Optional log this request into file level db
-* Optional set up logging
-
-* If all good, calculate drinks up to legal limit
-! Floor division to be used,for pints to closest half pint
-
-* Return json
-- mirror drink type
-- for pints different array will include 4 nested arrays, each with object (type (pint to half pint, bottle, third, quarter) and typeresult) 
-- maybe standardise same data structure for others, but use only one array element
-
-* Read about 
-
-*/
-
 // Node modules
 const http = require("http");
 const jsonBody = require("body/json");
@@ -32,6 +5,7 @@ const jsonBody = require("body/json");
 const logRequest = require("./components/logRequest");
 const validateData = require("./components/validateData");
 const calculateResult = require("./components/calculateResult");
+const { serverPort } = require("./config/config.json");
 
 const server = http.createServer();
 server.on("request", (request, response) => {
@@ -75,4 +49,4 @@ server.on("request", (request, response) => {
   });
 });
 
-server.listen(4141); // port to move to config file
+server.listen(serverPort);

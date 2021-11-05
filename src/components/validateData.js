@@ -1,39 +1,26 @@
-const requiredKeys = [
-  "drinkType",
-  "alcPercent",
-  "weightKg",
-  "gender",
-  "isLearner",
-];
-
-const allDrinks = ["pints", "wine", "cocktails", "booze"];
-
-const alcRange = {
-  start: 0.5,
-  end: 100,
-};
-
-const kgRange = {
-  start: 40,
-  end: 140,
-};
-
-const allGender = ["male", "female", "notProvided"];
+// Project modules
+const {
+  requestKeys,
+  drinkTypes,
+  alcRange,
+  kgRange,
+  genderOptions,
+} = require("../config/config.json");
 
 function validateData(data, response) {
   const passedKeys = Object.keys(data);
   response.statusCode = 400;
-  if (!validateAll(passedKeys, requiredKeys)) {
+  if (!validateAll(passedKeys, requestKeys)) {
     return {
       status: "ERROR",
-      message: `Required key missing. Passed keys ${passedKeys.toString()}, required keys ${requiredKeys.toString()}.`,
+      message: `Required key missing. Passed keys ${passedKeys.toString()}, required keys ${requestKeys.toString()}.`,
     };
-  } else if (!validateOne(data.drinkType, allDrinks)) {
+  } else if (!validateOne(data.drinkType, drinkTypes)) {
     return {
       status: "ERROR",
       message: `Drink not recognized. Passed drink ${
         data.drinkType
-      }, possible options ${allDrinks.toString()}.`,
+      }, possible options ${drinkTypes.toString()}.`,
     };
   } else if (!validateInRange(data.alcPercent, alcRange.start, alcRange.end)) {
     return {
@@ -45,12 +32,12 @@ function validateData(data, response) {
       status: "ERROR",
       message: `Wrong weight. Passed ${data.weightKg} kg, required range from ${kgRange.start} kg to ${kgRange.end} kg.`,
     };
-  } else if (!validateOne(data.gender, allGender)) {
+  } else if (!validateOne(data.gender, genderOptions)) {
     return {
       status: "ERROR",
       message: `Unrecognized gender entry. Passed entry ${
         data.gender
-      }, possible options ${allGender.toString()}.`,
+      }, possible options ${genderOptions.toString()}.`,
     };
   } else if (typeof data.isLearner !== "boolean") {
     return {

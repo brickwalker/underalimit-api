@@ -2,10 +2,9 @@
 const { existsSync, mkdirSync, appendFile } = require("fs");
 const {resolve, dirname} = require("path");
 // Project modules
-const config = require("../config/config");
+const { enableRequestLogging, requestsLogPath } = require("../config/config.json");
 
 function logRequest(body) {
-  const { enableRequestLogging, requestsLogPath } = config;
   if (!enableRequestLogging) {
     return;
   }

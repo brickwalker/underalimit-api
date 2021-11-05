@@ -1,4 +1,7 @@
+// Node modules
 const http = require("http");
+// Local modules
+const { serverPort } = require("./config/config.json");
 
 const data = JSON.stringify({
   drinkType: "pints",
@@ -10,7 +13,7 @@ const data = JSON.stringify({
 
 const options = {
   hostname: "localhost",
-  port: 4141, // port to move to config file
+  port: serverPort,
   path: "/portion",
   method: "POST",
   headers: {
@@ -21,12 +24,12 @@ const options = {
 
 const request = http.request(options);
 
-request.on('response', (res) => {
-    console.log(`statusCode: ${res.statusCode}`);
-    console.log("headers:", res.headers);
-    res.on("data", (chunk) => {
-      console.log("data:", chunk.toString());
-    });
+request.on("response", (res) => {
+  console.log(`statusCode: ${res.statusCode}`);
+  console.log("headers:", res.headers);
+  res.on("data", (chunk) => {
+    console.log("data:", chunk.toString());
+  });
 });
 
 request.on("error", (err) => {
