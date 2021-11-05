@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/app.js",
     "start:dev": "nodemon ./src/app.js",
-    "test": "powershell Invoke-WebRequest -Uri 'http://localhost:4141/portion' -Method Post -Body (powershell ('{\"user\": \"artem\"}' | ConvertTo-Json)) -ContentType 'application/json'"
+    "sim:req": "node ./src/test/simulateRequest.js",
+    "test": ""
   },
   "repository": {
     "type": "git",

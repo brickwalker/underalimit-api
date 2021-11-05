@@ -32,9 +32,11 @@ const calculateResult = require("./components/calculateResult");
 
 const server = http.createServer();
 server.on("request", (request, response) => {
-  request.on('error', err => console.log(`Request error code ${err.code}: ${err.message}.`));
-  response.on('error', err => {
-    console.log(`Response error code ${err.code}: ${err.message}.`)
+  request.on("error", (err) =>
+    console.log(`Request error code ${err.code}: ${err.message}.`)
+  );
+  response.on("error", (err) => {
+    console.log(`Response error code ${err.code}: ${err.message}.`);
     response.statusCode = 500;
     response.end("Server side error.");
   });
@@ -51,12 +53,10 @@ server.on("request", (request, response) => {
     } else if (err) {
       responseObj.message = `Body parsing issue: ${JSON.stringify(err)}.`;
     } else {
-      let inputData;
       try {
-        inputData = JSON.parse(body);
-        responseObj = validateData(inputData, response);
+        responseObj = validateData(body, response);
         if (responseObj.status === "OK") {
-          responseObj.result = calculateResult(inputData);
+          responseObj.result = calculateResult(body);
         }
         response.setHeader("Content-Type", "application/json");
       } catch (error) {
@@ -68,4 +68,4 @@ server.on("request", (request, response) => {
   });
 });
 
-server.listen(4141);
+server.listen(4141); // port to move to config file
