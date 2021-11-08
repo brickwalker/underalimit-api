@@ -29,21 +29,17 @@ server.on("request", (request, response) => {
       response.statusCode = 404;
       responseObj.message = `Incorrect endpoint: /portion required, ${request.url} used.`;
     } else if (err) {
-      responseObj.message = `Body parsing issue: ${JSON.stringify(err)}.`;
+      response.statusCode = 500;
+      responseObj.message = `Body parsing issue: ${err}.`;
+    } else if (typeof body !== "object") {
+      response.statusCode = 400;
+      responseObj.message = `Request does not contain valid JSON: ${body}.`;
     } else {
-      try {
-        if (typeof body !== "object" && !Array.isArray(body) && body !== null) {
-          throw "Passed data is not JSON";
-        }
-        responseObj = validateData(body, response);
-        if (responseObj.status === "OK") {
-          responseObj.result = calculateResult(body);
-        }
-        response.setHeader("Content-Type", "application/json");
-      } catch (error) {
-        response.statusCode = 400;
-        responseObj.message = `Error occured: ${error}.`;
+      responseObj = validateData(body, response);
+      if (responseObj.status === "OK") {
+        responseObj.result = calculateResult(body);
       }
+      response.setHeader("Content-Type", "application/json");
     }
     response.end(JSON.stringify(responseObj));
   });

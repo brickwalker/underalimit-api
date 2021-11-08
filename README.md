@@ -14,7 +14,9 @@ POST stringified JSON with following keyes
 {"drinkType":"pints","alcPercent":5,"weightKg":65,"gender":"male","isLearner":false}
 Keys and accepted values can be changed in config.json
 */
-npm run request
+npm run sim:req
+// To run tests
+npm test
 ```
 
 ## Basic functionality

@@ -6,7 +6,7 @@ const { enableRequestLogging, requestsLogPath } = require("../config/config.json
 
 function logRequest(body) {
   if (!enableRequestLogging) {
-    return;
+    return false;
   }
 
   const fullPath = resolve(requestsLogPath);

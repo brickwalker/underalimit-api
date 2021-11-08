@@ -1,14 +1,14 @@
 // Node modules
 const http = require("http");
 // Local modules
-const { serverPort } = require("./config/config.json");
+const { serverPort } = require("../config/config.json");
 
 const data = JSON.stringify({
   drinkType: "pints",
   alcPercent: 5,
-  weightKg: 65,
-  gender: "male",
-  isLearner: false,
+  weightKg: 48,
+  gender: "female",
+  isLearner: true,
 });
 
 const options = {
