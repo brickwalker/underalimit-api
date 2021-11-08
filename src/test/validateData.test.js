@@ -9,12 +9,12 @@ describe("validateData", function () {
 
   beforeEach(function () {
     data = {
-        drinkType: "pints",
-        alcPercent: 5,
-        weightKg: 50,
-        gender: "female",
-        isLearner: true,
-      };
+      drinkType: "pints",
+      alcPercent: 5,
+      weightKg: 50,
+      gender: "female",
+      isLearner: true,
+    };
     response = {};
   });
 
