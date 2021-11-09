@@ -9,6 +9,7 @@ const data = JSON.stringify({
   weightKg: 48,
   gender: "female",
   isLearner: true,
+  someOtherKey: "someOtherData"
 });
 
 const options = {
