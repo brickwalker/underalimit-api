@@ -20,9 +20,14 @@ server.on("request", (request, response) => {
   jsonBody(request, response, (err, body) => {
     logRequest(body);
     response.setHeader("X-Powered-By", "Node");
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    response.setHeader("Access-Control-Allow-Headers", "content-type");
     let responseObj = {};
     responseObj.status = "ERROR";
-    if (request.method !== "POST") {
+    if (request.method === "OPTIONS") {
+      response.statusCode = 200;
+    } else if (request.method !== "POST") {
       response.statusCode = 405;
       responseObj.message = `Unsupported method: POST required, ${request.method} used.`;
     } else if (request.url !== "/portion") {
