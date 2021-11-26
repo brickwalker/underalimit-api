@@ -10,7 +10,7 @@
     "smallBottle": 0.33,
     "smallCan": 0.25,
     "wineGlass": 0.1875,
-    "coctailGlass": 0.25,
+    "cocktailGlass": 0.25,
     "shot": 0.0355
   },
   "alcRange": {

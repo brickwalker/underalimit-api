@@ -28,8 +28,8 @@ function calculateResult(data) {
     });
   } else if (data.drinkType === "cocktails") {
     results.push({
-      drinkSize: "coctailGlass",
-      portions: calculatePortion(maxLitres, drinkSize.coctailGlass),
+      drinkSize: "cocktailGlass",
+      portions: calculatePortion(maxLitres, drinkSize.cocktailGlass),
     });
   } else if (data.drinkType === "booze") {
     results.push({
